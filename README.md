@@ -8,13 +8,13 @@
 ## 📝 Περιγραφή Έργου
 Αυτό το repository περιλαμβάνει δύο ολοκληρωμένα σενάρια επιθέσεων που αναπτύχθηκαν για ερευνητικούς σκοπούς στο πλαίσιο της πτυχιακής μου εργασίας. Κάθε φάκελος περιέχει το δικό του περιβάλλον υλοποίησης και οδηγίες χρήσης.
 
-### 📁 [1. WiFi Evil Twin Prototype]
+### 📁  WiFi Evil Twin Prototype
 Προσομοίωση επίθεσης σε επίπεδο δικτύου.
 *   **Στόχος:** Δημιουργία ψεύτικου Access Point.
 *   **Περιβάλλον:** Kali Linux.
 *   **Τεχνική:** Captive Portal με Node.js και iptables.
 
-### 📁 [2. Android App Exfiltration]
+### 📁  Android App Exfiltration
 Προσομοίωση επίθεσης σε επίπεδο εφαρμογής (Social Engineering).
 *   **Στόχος:** Υποκλοπή στοιχείων μέσω κλώνου της εφαρμογής Gov.gr Wallet.
 *   **Περιβάλλον:** Android (Kotlin/Compose) & Remote Listener (Python).
