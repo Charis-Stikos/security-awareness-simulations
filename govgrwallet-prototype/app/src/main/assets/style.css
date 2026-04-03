@@ -1,0 +1,184 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f2f2f2;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.card {
+    background-color: #fff;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    margin-top: 5vh;
+}
+
+header {
+    background-color: #fff;
+    padding: 12px 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-left, .logo-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.logo-right {
+    justify-content: flex-end;
+}
+
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.banner {
+    background-color: #5b89b4;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.banner h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.lang-btn {
+    background-color: #4089c2;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+main {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.login-box h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #4089c2;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.footer-links {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.footer-links a {
+    color: #4089c2;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 360px) {
+    .banner h1 {
+        font-size: 0.9rem;
+    }
+    
+    .login-box h2 {
+        font-size: 1.5rem;
+    }
+    
+    main {
+        padding: 20px 15px;
+    }
+    
+    svg {
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 320px) {
+    .header-content {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .logo-right {
+        justify-content: flex-start;
+    }
+}
