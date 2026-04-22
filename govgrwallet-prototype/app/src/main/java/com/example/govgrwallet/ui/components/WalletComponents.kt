@@ -90,11 +90,11 @@ fun OutlinedActionButton(text: String, icon: @Composable () -> Unit, onClick: ()
 @Composable
 fun QrCodeIcon() {
     Canvas(modifier = Modifier.size(18.dp)) {
-        val s = size.width * 0.42f
-        drawRect(Color.White, Offset(0f, 0f), Size(s, s))
-        drawRect(Color.White, Offset(size.width - s, 0f), Size(s, s))
-        drawRect(Color.White, Offset(0f, size.height - s), Size(s, s))
-        drawRect(Color.White, Offset(size.width - s, size.height - s), Size(s, s))
+        val quadrantSize = size.width * 0.42f
+        drawRect(Color.White, Offset(0f, 0f), Size(quadrantSize, quadrantSize))
+        drawRect(Color.White, Offset(size.width - quadrantSize, 0f), Size(quadrantSize, quadrantSize))
+        drawRect(Color.White, Offset(0f, size.height - quadrantSize), Size(quadrantSize, quadrantSize))
+        drawRect(Color.White, Offset(size.width - quadrantSize, size.height - quadrantSize), Size(quadrantSize, quadrantSize))
     }
 }
 
@@ -103,12 +103,48 @@ fun AgeVerificationIcon() {
     Box(contentAlignment = Alignment.Center, modifier = Modifier.size(24.dp)) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             val radius = size.width / 2
+            val cx = size.width / 2
+            val cy = size.height / 2
             for (i in 0 until 12) {
                 val angle = Math.toRadians((i * 30).toDouble())
-                drawCircle(Color.White, 1.2f, Offset((size.width/2 + (radius-2) * cos(angle)).toFloat(), (size.height/2 + (radius-2) * sin(angle)).toFloat()))
+                val dotX = (cx + (radius - 2) * cos(angle)).toFloat()
+                val dotY = (cy + (radius - 2) * sin(angle)).toFloat()
+                drawCircle(Color.White, radius = 1.2f, center = Offset(dotX, dotY))
             }
         }
         Text("18+", color = Color.White, fontSize = 8.sp, fontWeight = FontWeight.Bold)
+    }
+}
+
+@Composable
+fun EventTicketIcon() {
+    Canvas(modifier = Modifier.size(20.dp)) {
+        val w = size.width
+        val h = size.height
+        val notchRadius = h * 0.18f
+        val stroke = Stroke(width = 1.6f)
+
+        // Ticket outline with notches on left and right edges
+        drawRoundRect(Color.White, size = Size(w, h), cornerRadius = androidx.compose.ui.geometry.CornerRadius(4f), style = stroke)
+        drawCircle(Color.White, radius = notchRadius, center = Offset(0f, h / 2), style = stroke)
+        drawCircle(Color.White, radius = notchRadius, center = Offset(w, h / 2), style = stroke)
+
+        // Dashed vertical divider
+        val dashHeight = 3f
+        val gap = 3f
+        var y = h * 0.15f
+        while (y < h * 0.85f) {
+            drawLine(Color.White, Offset(w * 0.35f, y), Offset(w * 0.35f, (y + dashHeight).coerceAtMost(h * 0.85f)), strokeWidth = 1.2f)
+            y += dashHeight + gap
+        }
+
+        // Two small lines on the right stub (barcode hint)
+        val lineY1 = h * 0.38f
+        val lineY2 = h * 0.55f
+        val x0 = w * 0.46f
+        val x1 = w * 0.88f
+        drawLine(Color.White, Offset(x0, lineY1), Offset(x1, lineY1), strokeWidth = 1.4f)
+        drawLine(Color.White, Offset(x0, lineY2), Offset(x1, lineY2), strokeWidth = 1.4f)
     }
 }
 
@@ -122,7 +158,7 @@ fun FooterLogo() {
         }
         Text(buildAnnotatedString {
             withStyle(style = SpanStyle(color = Color.White, fontWeight = FontWeight.Bold)) { append("gov") }
-            withStyle(style = SpanStyle(color = Color(0xFF00B2FF), fontWeight = FontWeight.Bold)) { append("gr") }
+            withStyle(style = SpanStyle(color = Color(0xFF00B2FF), fontWeight = FontWeight.Bold)) { append(".gr") }
         }, fontSize = 22.sp)
     }
 }

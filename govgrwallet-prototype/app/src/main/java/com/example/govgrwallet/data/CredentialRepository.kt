@@ -12,6 +12,6 @@ object CredentialRepository {
     val logs = mutableStateListOf<CapturedCredential>()
 
     fun add(credential: CapturedCredential) {
-        logs.add(0, credential) // Add to top
+        logs.add(0, credential)
     }
 }

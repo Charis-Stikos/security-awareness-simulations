@@ -1,445 +1,368 @@
+/* GUESS Guest Wi-Fi - captive portal stylesheet */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 99;
-}
-
-.logo {
-    font-size: 2em;
-    color: #fff;
-    user-select: none;
-}
-
-.navigation {
-    display: flex;
-    align-items: center;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-}
-
-.navigation a {
-    position: relative;
-    font-size: 1.1em;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    margin-left: 40px;
-}
-
-.navigation .btnLogin-popup {
-    width: 160px;
-    height: 50px;
-    background: transparent;
-    border: 2px solid #fff;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: #fff;
-    font-weight: 500;
-    margin-left: 40px;
-    transition: .5s;
-}
-
-.navigation .btnLogin-popup:hover {
-    background: #fff;
-    color: #162938;
-}
-
-/* ... existing hover effects ... */
-.navigation a::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background: #fff;
-    border-radius: 5px;
-    left: 0;
-    bottom: -6px;
-    transform: scaleX(0);
-    transition: transform .5s;
-    transform-origin: right;
-}
-
-.navigation a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-.toggle-menu {
-    display: none; /* Hidden on desktop */
-    font-size: 2.5em;
-    color: #fff;
-    cursor: pointer;
-    margin-left: 20px;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f5;
+    color: #000;
     min-height: 100vh;
-    background: #162938 url('./images/bg-image.png') no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-
-.wrapper {
-    position: relative;
-    width: 90%;
-    max-width: 400px;
-    height: 500px;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    min-height: 100dvh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    overflow: hidden;
-    transition: transform .5s ease, height .2s ease;
-    transform: scale(0);
-    z-index: 100;
+    justify-content: center;
 }
 
-.wrapper .form-box {
-    position: absolute;
+.page {
     width: 100%;
-    padding: 40px;
-    transition: transform .18s ease;
-    transform: translateX(100%);
-    z-index: 1;
+    max-width: 440px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
 }
 
-.form-box h2 {
-    font-size: 2em;
-    color: #162938;
+.hidden {
+    display: none;
+}
+
+
+/* Header with GUESS logo */
+
+.header {
+    padding: 40px 24px 24px;
     text-align: center;
+    border-bottom: 1px solid #eee;
 }
 
-.input-box {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    border-bottom: 2px solid #162938;
-    margin: 30px 0;
+.guess-logo {
+    display: block;
+    margin: 0 auto;
 }
 
-.input-box label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    color: #162938;
-    font-weight: 500;
-    pointer-events: none;
-    transition: .5s;
-}
-
-.input-box input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #162938;
+.tagline {
+    margin-top: 14px;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #555;
     font-weight: 600;
 }
 
-.input-box .icon {
-    position: absolute;
-    right: 8px;
-    font-size: 1.2em;
-    color: #162938;
-    line-height: 57px;
+
+/* Main card */
+
+.card {
+    flex: 1;
+    padding: 30px 26px 26px;
 }
 
-.input-box input:focus~label,
-.input-box input:valid~label {
-    top: -5px;
+.card h1 {
+    font-size: 22px;
+    font-weight: 300;
+    color: #000;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-.remember-forgot {
-    font-size: .9em;
-    color: #162938;
-    font-weight: 500;
-    margin: -15px 0 15px;
+.intro {
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 26px;
+}
+
+
+/* Social login buttons */
+
+.social-buttons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.remember-forgot label input {
-    accent-color: #162938;
-    margin-right: 3px;
-}
-
-.remember-forgot a {
-    color: #162938;
-    text-decoration: none;
-}
-
-.remember-forgot a:hover {
-    text-decoration: underline;
-}
-
-.btn {
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     width: 100%;
-    height: 45px;
-    background: #162938;
+    height: 46px;
+    padding: 0 16px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    font-family: inherit;
+    text-align: left;
+}
+
+.social-btn:hover {
+    background: #f9f9f9;
+    border-color: #bbb;
+}
+
+.social-btn.apple-btn {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+.social-btn.apple-btn:hover {
+    background: #1a1a1a;
+}
+
+.icon {
+    flex-shrink: 0;
+}
+
+
+/* OR separator */
+
+.separator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0 18px;
+    color: #aaa;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.separator::before,
+.separator::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+
+/* Guest form */
+
+.guest-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.guest-form input,
+.guest-form select {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #000;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.15s;
+    font-family: inherit;
+}
+
+.guest-form input::placeholder {
+    color: #aaa;
+}
+
+.guest-form input:focus,
+.guest-form select:focus {
+    border-color: #cc0000;
+}
+
+.guest-form select {
+    color: #888;
+    cursor: pointer;
+}
+
+.guest-form select:valid {
+    color: #000;
+}
+
+.submit-btn {
+    width: 100%;
+    height: 46px;
+    background: #cc0000;
+    color: #fff;
     border: none;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: #fff;
-    font-weight: 500;
-}
-
-.login-register {
-    font-size: 1em;
-    color: #162938;
-    font-weight: 500;
-    margin: 25px 0 10px;
-    text-align: center;
-}
-
-.login-register p a {
-    color: #162938;
-    text-decoration: none;
+    font-size: 13px;
     font-weight: 600;
-}
-
-.login-register p a:hover {
-    text-decoration: underline;
-}
-
-.wrapper .icon-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 45px;
-    height: 45px;
-    background: #162938;
-    font-size: 2em;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom-left-radius: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     cursor: pointer;
-    z-index: 3;
+    transition: background 0.15s;
+    font-family: inherit;
+    margin-top: 4px;
 }
 
-.wrapper .form-box.login {
-    transform: translateX(0);
-    z-index: 2;
+.submit-btn:hover {
+    background: #a80000;
 }
 
-.wrapper .form-box.register {
-    position: absolute;
-    transform: translateX(100%);
+.submit-btn:active {
+    transform: scale(0.99);
 }
 
-.wrapper.active {
-    height: 600px;
-}
 
-.social-login {
-    margin-top: 15px;
+/* Terms & AUP */
+
+.terms {
+    font-size: 12px;
+    color: #888;
     text-align: center;
-    color: #162938;
+    line-height: 1.5;
 }
 
-.social-login p {
-    font-size: 0.9em;
-    font-weight: 500;
+.terms a {
+    color: #cc0000;
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
-.social-icons {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
+.aup {
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: #fafafa;
+    border-left: 3px solid #cc0000;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.7;
 }
 
-.social-icons a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 2px solid #162938;
-    outline: none;
-    border-radius: 50%;
-    font-size: 1.3em;
-    color: #162938;
-    margin: 0 8px;
-    transition: .5s;
+.aup p {
+    margin-bottom: 8px;
 }
 
-.social-icons a:hover {
-    background: #162938;
-    color: #fff;
+.aup p:last-child {
+    margin-bottom: 0;
 }
 
-.wrapper.active-popup {
-    transform: scale(1);
+
+/* Footer */
+
+.footer {
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    border-top: 1px solid #eee;
 }
 
-/* Social Login Modals */
-.social-modal-overlay {
+
+/* Modal overlay */
+
+.overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    padding: 16px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(5px);
+    transition: opacity 0.2s;
+    z-index: 999;
 }
 
-.social-modal-overlay.active {
+.overlay.active {
     opacity: 1;
     pointer-events: all;
 }
 
-.social-modal {
+.modal {
     background: #fff;
-    width: 90%;
+    width: 100%;
     max-width: 400px;
-    border-radius: 8px;
-    padding: 40px;
     position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    text-align: center;
-    display: none; /* Hidden by default */
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    display: none;
 }
 
-.social-modal-overlay.active .social-modal {
-    transform: translateY(0);
+.modal.show {
+    display: block;
 }
 
-.social-modal h3 {
-    margin-bottom: 20px;
-    font-size: 1.5em;
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #999;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 2;
+}
+
+.close-btn:hover {
     color: #333;
 }
 
-.social-modal input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-}
 
-.social-modal .modal-btn {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1em;
-    cursor: pointer;
-    font-weight: 500;
-}
+/* Google modal */
 
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5em;
-    cursor: pointer;
-    color: #555;
-}
-
-/* Brand Specifics - Realistic Replicas */
-
-/* Facebook Close Button Fix */
-.modal-facebook .close-modal {
-    color: #fff;
-    opacity: 0.8;
-}
-.modal-facebook .close-modal:hover {
-    opacity: 1;
-}
-
-/* Google */
-.modal-google {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    color: #202124;
-    text-align: left;
-    padding: 48px 40px 36px;
-    max-width: 450px;
-    border: 1px solid #dadce0;
+.google-modal {
+    padding: 40px 40px 32px;
     border-radius: 8px;
 }
-.modal-google * {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-}
-.modal-google h3 {
-    font-weight: 400;
-    font-size: 24px;
-    margin-bottom: 8px;
-    color: #202124;
-    text-align: center;
-}
-.modal-google p {
-    font-size: 16px;
-    margin-bottom: 40px;
-    color: #202124;
-    text-align: center;
-}
+
 .g-logo {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 }
-.g-input-wrapper {
+
+.google-modal h2 {
+    font-size: 24px;
+    font-weight: 400;
+    color: #202124;
+    text-align: center;
+    margin-bottom: 8px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.google-modal > p {
+    font-size: 16px;
+    color: #202124;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.g-field {
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
-.g-input-wrapper input {
+
+.g-field input {
     width: 100%;
     padding: 13px 15px;
     border: 1px solid #dadce0;
     border-radius: 4px;
     font-size: 16px;
-    margin: 0;
+    color: #202124;
     outline: none;
-    transition: border 0.2s;
+    background: #fff;
 }
-.g-input-wrapper input:focus {
+
+.g-field input:focus {
     border: 2px solid #1a73e8;
     padding: 12px 14px;
 }
-.g-input-wrapper label {
+
+.g-field label {
     position: absolute;
     left: 12px;
     top: 50%;
@@ -448,347 +371,276 @@ body {
     padding: 0 4px;
     font-size: 16px;
     color: #5f6368;
-    transition: 0.2s;
     pointer-events: none;
+    transition: 0.15s;
 }
-.g-input-wrapper input:focus ~ label,
-.g-input-wrapper input:valid ~ label {
+
+.g-field input:focus ~ label,
+.g-field input:not(:placeholder-shown) ~ label {
     top: 0;
     font-size: 12px;
     color: #1a73e8;
 }
+
+.g-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #dadce0;
+    border-radius: 20px;
+    padding: 6px 12px 6px 8px;
+    font-size: 14px;
+    color: #202124;
+    margin-bottom: 20px;
+}
+
 .g-link {
     color: #1a73e8;
+    font-size: 14px;
     font-weight: 500;
     text-decoration: none;
-    font-size: 14px;
     display: inline-block;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
 }
-.g-footer {
+
+.g-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
 }
+
 .g-btn {
     background: #1a73e8;
     color: #fff;
     border: none;
     padding: 10px 24px;
     border-radius: 4px;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    font-size: 14px;
-    transition: background 0.2s, box-shadow 0.2s;
-}
-.g-btn:hover {
-    background: #1557b0;
-    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+    transition: background 0.15s;
 }
 
-/* Facebook */
-.modal-facebook {
-    padding: 0;
-    background: #eceff5;
-    overflow: hidden;
-    font-family: Helvetica, Arial, sans-serif;
-    max-width: 400px;
+.g-btn:hover {
+    background: #1557b0;
 }
-.fb-header {
-    background: #3b5998;
-    padding: 10px 0;
-    text-align: center;
-    color: #fff;
-    font-size: 2em;
+
+.g-btn:disabled {
+    background: #a8c7fa;
+    cursor: default;
 }
-.fb-body {
-    padding: 20px;
-    background: #fff;
-    margin: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+
+
+/* Microsoft modal */
+
+.microsoft-modal {
+    padding: 44px 40px 36px;
 }
-.fb-body p {
-    color: #606770;
-    font-size: 14px;
-    margin-bottom: 15px;
-    text-align: center;
+
+.ms-logo {
+    margin-bottom: 24px;
 }
-.fb-body input {
-    background: #fff;
-    border: 1px solid #dddfe2;
-    color: #1d2129;
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 16px;
-    margin-bottom: 10px;
+
+.microsoft-modal h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    font-family: "Segoe UI", sans-serif;
 }
-.fb-btn {
-    background: #1877f2;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 10px;
+
+.ms-sub {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 24px;
+}
+
+.ms-field {
+    margin-bottom: 18px;
+}
+
+.ms-field input {
     width: 100%;
-    cursor: pointer;
-    margin-top: 10px;
+    height: 44px;
+    padding: 0 12px;
+    border: none;
+    border-bottom: 2px solid #767676;
+    font-size: 15px;
+    color: #1a1a1a;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.2s;
+    font-family: "Segoe UI", sans-serif;
 }
-.fb-link {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-    color: #1877f2;
+
+.ms-field input:focus {
+    border-bottom-color: #0067b8;
+}
+
+.ms-field input::placeholder {
+    color: #aaa;
+}
+
+.ms-email-shown {
+    font-size: 15px;
+    color: #1a1a1a;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.ms-no-account {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 28px;
+}
+
+.ms-no-account a,
+.ms-link {
+    color: #0067b8;
     text-decoration: none;
-    font-size: 12px;
 }
-.fb-link:hover {
+
+.ms-link {
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.ms-link:hover,
+.ms-no-account a:hover {
     text-decoration: underline;
 }
 
-/* Apple */
-.modal-apple {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-    color: #000;
-    padding: 40px;
-    max-width: 420px;
+.ms-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 }
-.modal-apple * {
-    font-family: inherit !important;
-}
-.apple-logo {
-    font-size: 4em;
-    margin-bottom: 10px;
-}
-.modal-apple h3 {
-    font-size: 24px;
+
+.ms-btn {
+    background: #0067b8;
+    color: #fff;
+    border: none;
+    padding: 10px 26px;
+    font-size: 15px;
     font-weight: 600;
-    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: "Segoe UI", sans-serif;
 }
-.modal-apple p {
-    font-size: 17px;
-    margin-bottom: 30px;
+
+.ms-btn:hover {
+    background: #005a9e;
+}
+
+.ms-btn:disabled {
+    background: #a8c7fa;
+    cursor: default;
+}
+
+
+/* Apple modal */
+
+.apple-modal {
+    padding: 40px 36px 32px;
+    text-align: center;
+    border-radius: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+}
+
+.apple-logo {
+    margin-bottom: 16px;
+}
+
+.apple-modal h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 6px;
+}
+
+.apple-modal > p {
+    font-size: 15px;
+    color: #3a3a3c;
+    margin-bottom: 24px;
     line-height: 1.4;
 }
-.apple-input-group {
-    margin-bottom: 30px;
-    border: 1px solid #d2d2d2;
-    border-radius: 8px;
-    padding: 0 15px;
+
+.apple-fields {
+    border: 1px solid #d2d2d7;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    text-align: left;
 }
-.input-row {
-    display: flex;
-    align-items: center;
-}
-.input-row input {
+
+.apple-fields input {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
     border: none;
     font-size: 17px;
-    flex-grow: 1;
+    color: #1d1d1f;
+    background: #fff;
     outline: none;
-    padding: 15px 0;
-    margin: 0;
-    background: transparent;
 }
-.apple-arrow-btn {
-    background: transparent;
+
+.apple-fields input::placeholder {
+    color: #aeaeb2;
+}
+
+.apple-sep {
+    height: 1px;
+    background: #d2d2d7;
+}
+
+.apple-btn-submit {
+    width: 100%;
+    height: 48px;
+    background: #0071e3;
+    color: #fff;
     border: none;
-    font-size: 24px;
-    color: #d2d2d2;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 500;
     cursor: pointer;
-    transition: color 0.3s;
-    padding: 0;
-    display: flex;
-    align-items: center;
+    margin-bottom: 14px;
+    transition: background 0.15s;
 }
-.input-row input:focus ~ .apple-arrow-btn,
-.input-row input:not(:placeholder-shown) ~ .apple-arrow-btn {
-    color: #0071e3;
+
+.apple-btn-submit:hover {
+    background: #0064cc;
 }
-.apple-footer a {
+
+.apple-link {
+    font-size: 14px;
     color: #0070c9;
     text-decoration: none;
-    font-size: 14px;
-    display: block;
-    margin-top: 10px;
 }
 
-/* Terms Modal Animation */
-.wrapper .form-box.terms {
-    position: absolute;
-    transform: translateX(100%);
-    padding: 40px;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto; /* Allow scrolling for long terms */
+.apple-link:hover {
+    text-decoration: underline;
 }
 
-/* Active State for Terms (When Wrapper is Active) */
-.wrapper.active .form-box.login {
-    transform: translateX(-100%);
+
+/* Responsive */
+
+@media (max-width: 440px) {
+    .header { padding: 32px 20px 20px; }
+    .card { padding: 26px 20px 22px; }
+    .google-modal { padding: 32px 24px 24px; }
+    .microsoft-modal { padding: 36px 24px 28px; }
+    .apple-modal { padding: 32px 24px 24px; }
+    .footer { padding: 12px 20px; }
 }
 
-.wrapper.active .form-box.terms {
-    transform: translateX(0);
-}
-
-/* Scrollbar for terms */
-.form-box.terms::-webkit-scrollbar {
-    width: 5px;
-}
-.form-box.terms::-webkit-scrollbar-track {
-    background: transparent;
-}
-.form-box.terms::-webkit-scrollbar-thumb {
-    background: #162938; 
-    border-radius: 5px;
-}
-
-/* Display control */
-.social-modal.show { display: block; }
-
-/* Media Queries for Responsiveness */
-
-@media (max-width: 992px) {
-    .header {
-        padding: 20px 50px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header {
-        padding: 15px 20px;
-        background: transparent; /* Clean header */
-        backdrop-filter: none;
-    }
-
-    .logo {
-        font-size: 1.5em;
-        z-index: 1001;
-        position: relative;
-    }
-
-    .toggle-menu {
-        display: block;
-        z-index: 1001;
-        position: relative;
-        transition: transform 0.3s ease;
-    }
-
-    .nav-links {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(22, 41, 56, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        transform: translateX(100%);
-        transform-origin: right;
-        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        z-index: 1000;
-    }
-
-    .nav-links.active {
-        transform: translateX(0);
-    }
-
-    .navigation a {
-        margin: 20px 0;
-        font-size: 1.5em;
-        display: block;
-        margin-left: 0;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    /* Staggered animation for links */
-    .nav-links.active a {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: 0.2s;
-    }
-    .nav-links.active a:nth-child(2) { transition-delay: 0.3s; }
-    .nav-links.active a:nth-child(3) { transition-delay: 0.4s; }
-    .nav-links.active a:nth-child(4) { transition-delay: 0.5s; }
-
-    /* Connect Button inside Mobile Menu (CTA) */
-    .navigation .btnLogin-popup {
-        width: 80%;
-        max-width: 300px;
-        height: 55px;
-        font-size: 1.1em;
-        margin-left: 0;
-        margin-top: 40px; /* Separate from links */
-        background: #fff;
-        color: #162938;
-        border: none;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    
-    .nav-links.active .btnLogin-popup {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: 0.6s; /* Appear last */
-    }
-    
-    .navigation .btnLogin-popup:hover {
-        background: #eee;
-        transform: scale(1.05); /* Slight pop */
-    }
-}
-
-@media (max-width: 480px) {
-    /* Keep the card look on mobile */
-    .wrapper {
-        width: 90%;
-        height: 520px;
-        border-radius: 20px;
-        border: 2px solid rgba(255, 255, 255, 0.5);
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .wrapper.active {
-        height: 600px;
-    }
-
-    .wrapper .form-box {
-        padding: 30px 20px;
-    }
-
-    /* Adjust social modals for mobile */
-    .social-modal {
-        width: 90%;
-        max-width: 350px;
-        padding: 20px;
-        margin: auto;
-    }
-
-    /* Fix Facebook Clipping */
-    .modal-facebook {
-        width: 92%;
-        padding: 0;
-    }
-    
-    .fb-body {
-        margin: 10px;
-        width: auto;
-    }
-    
-    .fb-body input {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
+@media (min-width: 441px) {
+    body { background: #e8e8e8; }
+    .page {
+        min-height: unset;
+        margin: 32px auto;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     }
 }
