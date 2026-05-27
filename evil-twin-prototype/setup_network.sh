@@ -3,8 +3,8 @@
 # Ρυθμίζει το δίκτυο για το evil twin captive portal.
 # Τρέξε μία φορά πριν τα hostapd, dnsmasq, server.js.
 
-IFACE=wlan0      # AP interface
-INET=eth0        # uplink στο πραγματικό internet
+IFACE=wlan0      # διεπαφή AP
+INET=eth0        # σύνδεση προς το πραγματικό internet
 AP_IP=10.0.0.1
 
 sed -i 's/\r//' hostapd.conf dnsmasq.conf
